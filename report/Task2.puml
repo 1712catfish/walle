@@ -1,0 +1,41 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+
+actor       BackOfficer
+actor       Collector
+actor       Janitor
+
+'boundary    RoutePlanningInterface
+'control     RoutePlanningModule
+
+participant RoutePlanningModule
+
+
+database      Database
+
+
+
+
+
+BackOfficer -> RoutePlanningModule ++ : Use
+
+RoutePlanningModule -> Database ++ : Retrieve MCP list
+return MCP list
+
+RoutePlanningModule -> Database ++ : Retrieve employee list
+return Employee list
+
+RoutePlanningModule -> Database ++ : Retrieve vehicle list
+return Vehicle list
+
+
+RoutePlanningModule -> RoutePlanningModule : Apply auto route planning algorithm
+
+RoutePlanningModule -> Janitor: Send new schedule
+RoutePlanningModule -> Collector: Send new schedule
+
+return OkMessage
+
+
+@enduml

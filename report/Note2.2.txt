@@ -1,0 +1,27 @@
+Plan route	entity, mcsp, routeSchedulingAlgorithm:
+	routes = routeSchedulingAlgorithm mcps count entity
+	update(entity, routes = routes)
+	send message(entity, routes)
+
+Task:
+	collectors = Database.Retrive collector infos()
+	janitors = Database.Retrieve janitor infos()
+
+	mcps = Databse.Retrive mcp infos()
+
+	Plan route collectors, mcps, TSP
+	Plan route janitors mcps KMeans
+	
+Send message entity, routes
+	for person route in entity, routes:
+		send (route => person)
+
+retrieve information about MCPs (their location and traveling distance to other MCPs)
+
+retrieve number of available collectors
+from MCP information and number of collector, plan routes using Ant Colony algorithm
+message collectors about their routes
+ 
+retrieve number of available janitors
+from MCP information and number of janitors,  plan routes using KMean algorithm
+message janitors about their routes
